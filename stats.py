@@ -13,10 +13,15 @@ def get_num_characters(book_text):
 
     return characters
 
-def sorted_list(dictionary):
-    list_dict = []
+def sort_on(dictionary):
+    return dictionary["num"]
 
+def get_sorted_list(dictionary):
+    list_dict = []
+    
     for char in dictionary:
         list_dict.append({"char": char, "num": dictionary[char]})
+    
+    list_dict.sort(reverse=True, key=sort_on) 
 
     return list_dict

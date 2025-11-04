@@ -1,6 +1,8 @@
+import sys
 from stats import get_num_words
 from stats import get_num_characters
-from stats import sorted_list
+from stats import get_sorted_list
+
 
 def get_book_text(path_to_file):
     content = ""
@@ -11,7 +13,11 @@ def get_book_text(path_to_file):
     return content
 
 def main():
-    path = "books/frankenstein.txt"
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    path = sys.argv[1]
     book_text = get_book_text(path)
     
     print(f"============ BOOKBOT ============")
@@ -24,11 +30,14 @@ def main():
 
     dictionary = get_num_characters(book_text)
 
-    lista = sorted_list(dictionary)
+    lista = get_sorted_list(dictionary)
 
     print("--------- Character Count -------")
-    print(dictionary)
+    for char in lista:
+        if char["char"].isalpha():
+            print(f"{char["char"]}: {char["num"]}")
 
+    print("============= END ===============")
 
 main()
 
